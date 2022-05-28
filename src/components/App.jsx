@@ -16,6 +16,10 @@ export const App = () => {
 
   const { good, neutral, bad } = optionsVariables;
 
+  const total = good + neutral + bad;
+
+  const positiveFeedback = Number(((good / total) * 100).toFixed());
+
   const onLeaveFeedback = propertyName => {
     setOptionsVariables(prevState => {
       console.log(prevState);
@@ -26,30 +30,20 @@ export const App = () => {
     });
   };
 
-  const countTotalFeedback = () => {
-    return good + neutral + bad;
-  };
-
-  const countPositiveFeedback = () => {
-    return Number(((good / countTotalFeedback()) * 100).toFixed());
-  };
-
   return (
     <>
       <Section title="Please leave feedback">
         <FeedbackOptions options={options} onLeaveFeedback={onLeaveFeedback} />
       </Section>
       <Section title="Statistics">
-        {!countTotalFeedback() && (
-          <Notification message="There is no positive feedback" />
-        )}
-        {countTotalFeedback() > 0 && (
+        {!total && <Notification message="There is no positive feedback" />}
+        {positiveFeedback > 0 && (
           <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
-            total={countTotalFeedback()}
-            positivePercentage={countPositiveFeedback()}
+            total={total}
+            positivePercentage={positiveFeedback}
           />
         )}
       </Section>
