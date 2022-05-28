@@ -1,0 +1,14 @@
+button {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: transparent;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:not(:last-child) {
+  margin-right: 15px;
+}
+button:hover {
+  background-color: beige;
+}
